@@ -4,6 +4,7 @@ import { EmployeeBase } from 'src/models/interfaces/employeeBase';
 import { Observable } from 'rxjs';
 import { EmployeeService } from '../services/employee/employee.service';
 import { PagedResponse } from 'src/models/interfaces/pagedResponse';
+import { PaginationFilter } from 'src/models/classes/paginationFilter';
 
 @Component({
   selector: 'app-employees',
@@ -12,17 +13,31 @@ import { PagedResponse } from 'src/models/interfaces/pagedResponse';
 })
 export class EmployeesComponent implements OnInit {
     employees!: EmployeeBase[];
-
     loading: boolean = true;
+    paginationFilter: PaginationFilter ;
+    totalRecords: number = 0;
 
-    activityValues: number[] = [0, 100];
+    constructor(private employeeService: EmployeeService) {
+        this.paginationFilter = new PaginationFilter();
+    }
 
-    constructor(private employeeService: EmployeeService) {}
 
     ngOnInit() {
-        this.employeeService.getEmployees().subscribe((res:PagedResponse<EmployeeBase>) => {
-            this.employees = res.list;
-            this.loading = false;
-        });
-      }
+      this.loadEmployees();
+    }
+
+    loadEmployees() {
+      this.employeeService.getEmployees(this.paginationFilter).subscribe((res:PagedResponse<EmployeeBase>) => {
+          this.employees = res.list;
+          this.totalRecords = res.total_records;
+          this.loading = false;
+      });
+    }
+
+
+    onPageChanged(event: any) {
+      this.paginationFilter = new PaginationFilter (event.first / event.rows + 1, event.rows);
+      this.loadEmployees();
+
+    }
 }
