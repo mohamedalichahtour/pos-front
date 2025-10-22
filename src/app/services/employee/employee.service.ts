@@ -6,6 +6,7 @@ import { PagedResponse } from 'src/models/interfaces/pagedResponse';
 import { EmployeeBase } from 'src/models/interfaces/employeeBase';
 import { baseUrl } from 'src/models/baseUrl';
 import { PaginationFilter } from 'src/models/classes/paginationFilter';
+import { EmployeeFilter } from 'src/models/classes/employeeFilter';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,11 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  getEmployees(paginationFilter: PaginationFilter) {
+  getEmployees(employeeFilter: EmployeeFilter) {
     let params = new HttpParams()
-        .set('page_size', paginationFilter.page_size)
-        .set('page_number', paginationFilter.page_number);
+        .set("name_substr", employeeFilter.name_substr as string)
+        .set("page_size", employeeFilter.page_size)
+        .set("page_number", employeeFilter.page_number);
 
     const httpOptions = {params}
     const endPointUrl = baseUrl + 'employee/all'

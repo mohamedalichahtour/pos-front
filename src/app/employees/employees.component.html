@@ -1,4 +1,19 @@
-<p>employees works!</p>
+<form [formGroup]="employeeFilterForm">
+    <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-user"></i>
+    </span>
+    <input id="name_substr" type="text" formControlName="name_substr" pInputText placeholder="Employee Name" />
+</div> 
+
+</form>
+
+
+<p-button (click)="openAddEmployeeDialog()" label="Add Employee" icon="pi pi-plus"></p-button>
+<p-button (click)="openImportEmployeesDialog()" label="Import Employees" icon="pi pi-file-import"></p-button> 
+
+
+
 
 <div class="card">
     <p-table

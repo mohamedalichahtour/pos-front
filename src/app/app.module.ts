@@ -5,8 +5,13 @@ import { SidebarModule } from 'primeng/sidebar';
 import { MenubarModule } from 'primeng/menubar';
 import { MenuModule } from 'primeng/menu';
 import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 
 
+
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -20,6 +25,10 @@ import { ImportEmployeesComponent } from './import-employees/import-employees.co
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +40,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PageNotFoundComponent,
   ],
   imports: [
+    HttpClientModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -38,9 +49,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     MenubarModule,
     MenuModule,
     TableModule,
-    HttpClientModule
+    InputTextModule,
+    ButtonModule,
+    DynamicDialogModule 
+    
   ],
-  providers: [],
+  providers: [DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
