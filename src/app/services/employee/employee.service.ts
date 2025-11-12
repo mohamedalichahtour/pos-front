@@ -7,6 +7,7 @@ import { EmployeeBase } from 'src/models/interfaces/employeeBase';
 import { baseUrl } from 'src/models/baseUrl';
 import { PaginationFilter } from 'src/models/classes/paginationFilter';
 import { EmployeeFilter } from 'src/models/classes/employeeFilter';
+import { ImportPossibleFields } from 'src/models/interfaces/importPossibleFields';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,10 @@ export class EmployeeService {
     const httpOptions = {params}
     const endPointUrl = baseUrl + 'employee/all'
     return this.http.get<PagedResponse<EmployeeBase>>(endPointUrl,httpOptions);
+    }
+
+    getOptions() {
+      const endPointUrl = baseUrl + 'employee/import/possible-fields'
+      return this.http.get<ImportPossibleFields>(endPointUrl)
     }
 } 

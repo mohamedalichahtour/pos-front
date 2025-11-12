@@ -4,7 +4,6 @@ import { debounceTime, Observable } from 'rxjs';
 import { EmployeeService } from '../services/employee/employee.service';
 import { PagedResponse } from 'src/models/interfaces/pagedResponse';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-
 import { FormBuilder } from '@angular/forms';
 import { EmployeeFilter } from 'src/models/classes/employeeFilter';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
@@ -22,7 +21,7 @@ export class EmployeesComponent implements OnInit {
     totalRecords: number = 0;
     employeeFilterForm = this.fb.group({
         name_substr: [''],
-    });;
+    });
 
     constructor(private employeeService: EmployeeService,
       private fb: FormBuilder, 
